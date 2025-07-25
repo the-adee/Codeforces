@@ -1,0 +1,7 @@
+
+
+# output folder for c++ executable files
+output
+
+# settings.json for vs-code
+.vscode
