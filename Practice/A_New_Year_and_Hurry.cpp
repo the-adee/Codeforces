@@ -23,30 +23,10 @@ const ll LINF = 1e18;
 // #define debug(x) cerr << #x << " = " << x << endl
 
 // solve function for each test case
-void solve(int n)
+void solve()
 {
-    vector<int> home(n), away(n);
-    for (int i = 0; i < n; ++i)
-    {
-        cin >> home[i] >> away[i];
-    }
-
-    int conflictCount = 0;
-
-    for (int i = 0; i < n; ++i)
-    {
-        for (int j = 0; j < n; ++j)
-        {
-            if (i == j)
-                continue;
-            if (home[i] == away[j])
-            {
-                conflictCount++;
-            }
-        }
-    }
-
-    cout << conflictCount << '\n';
+    // yo start from here,
+    // don't worry, you gonna solve this one too
 }
 
 int main()
@@ -58,9 +38,31 @@ int main()
 
     while (T--)
     {
-        int n;
-        cin >> n;
-        solve(n);
+        int n, k;
+        cin >> n >> k;
+
+        int left = 0, right = n;
+        int maxProblems = 0;
+        int timeAvailable = 240 - k;
+
+        while (left <= right)
+        {
+            int mid = (left + right) / 2;
+            int timeNeeded = 5 * mid * (mid + 1) / 2;
+
+            if (timeNeeded <= timeAvailable)
+            {
+                maxProblems = mid;
+                left = mid + 1;
+            }
+            else
+            {
+                right = mid - 1;
+            }
+        }
+
+        cout << maxProblems << endl;
+        solve();
     }
 
     return 0;

@@ -25,28 +25,36 @@ const ll LINF = 1e18;
 // solve function for each test case
 void solve(int n)
 {
-    vector<int> home(n), away(n);
-    for (int i = 0; i < n; ++i)
+    vector<int> contestRating(n, 0);
+
+    for (int i = 0; i < n; i++)
     {
-        cin >> home[i] >> away[i];
+        int rating;
+        cin >> rating;
+
+        contestRating[i] = rating;
     }
 
-    int conflictCount = 0;
+    int count = 0;
+    int maxRating = contestRating[0];
+    int minRating = contestRating[0];
 
-    for (int i = 0; i < n; ++i)
+    // bool flag = false;
+
+    for (int i = 1; i < n; i++)
     {
-        for (int j = 0; j < n; ++j)
+        if (contestRating[i] > maxRating)
         {
-            if (i == j)
-                continue;
-            if (home[i] == away[j])
-            {
-                conflictCount++;
-            }
+            maxRating = contestRating[i];
+            count++;
+        }
+        else if (contestRating[i] < minRating)
+        {
+            minRating = contestRating[i];
+            count++;
         }
     }
-
-    cout << conflictCount << '\n';
+    cout << count << "\n";
 }
 
 int main()
@@ -60,7 +68,14 @@ int main()
     {
         int n;
         cin >> n;
-        solve(n);
+        if (n == 1)
+        {
+            cout << 0 << "\n";
+        }
+        else
+        {
+            solve(n);
+        }
     }
 
     return 0;

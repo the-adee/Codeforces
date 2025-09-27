@@ -23,30 +23,9 @@ const ll LINF = 1e18;
 // #define debug(x) cerr << #x << " = " << x << endl
 
 // solve function for each test case
-void solve(int n)
+int solve(int x, int n)
 {
-    vector<int> home(n), away(n);
-    for (int i = 0; i < n; ++i)
-    {
-        cin >> home[i] >> away[i];
-    }
-
-    int conflictCount = 0;
-
-    for (int i = 0; i < n; ++i)
-    {
-        for (int j = 0; j < n; ++j)
-        {
-            if (i == j)
-                continue;
-            if (home[i] == away[j])
-            {
-                conflictCount++;
-            }
-        }
-    }
-
-    cout << conflictCount << '\n';
+    return (n % 2) == 0 ? 0 : x;
 }
 
 int main()
@@ -54,13 +33,16 @@ int main()
     FAST_IO;
 
     int T = 1;
-    // cin >> T; // uncomment for multiple test cases
+    cin >> T;
 
     while (T--)
     {
-        int n;
-        cin >> n;
-        solve(n);
+        int x, n;
+
+        cin >> x >> n;
+
+        int result = solve(x, n);
+        cout << result << "\n";
     }
 
     return 0;

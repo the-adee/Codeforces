@@ -23,30 +23,35 @@ const ll LINF = 1e18;
 // #define debug(x) cerr << #x << " = " << x << endl
 
 // solve function for each test case
-void solve(int n)
+void solve(vector<int> vec, int n)
 {
-    vector<int> home(n), away(n);
-    for (int i = 0; i < n; ++i)
+    unordered_map<int, int> freq;
+
+    for (int val : vec)
     {
-        cin >> home[i] >> away[i];
+        freq[val]++;
+    }
+    int maxLen = 0;
+
+    for (const auto &pair : freq)
+    {
+        maxLen = max(maxLen, pair.second);
     }
 
-    int conflictCount = 0;
-
-    for (int i = 0; i < n; ++i)
+    for (int i = 0; i <= maxLen; i++)
     {
-        for (int j = 0; j < n; ++j)
+        int count = 0;
+        for (const auto &pair : freq)
         {
-            if (i == j)
-                continue;
-            if (home[i] == away[j])
+            if (pair.second >= i)
             {
-                conflictCount++;
+                count++;
             }
         }
+        maxLen = max(maxLen, i * count);
     }
 
-    cout << conflictCount << '\n';
+    cout << maxLen << "\n";
 }
 
 int main()
@@ -54,13 +59,23 @@ int main()
     FAST_IO;
 
     int T = 1;
-    // cin >> T; // uncomment for multiple test cases
+    cin >> T; // uncomment for multiple test cases
 
     while (T--)
     {
         int n;
         cin >> n;
-        solve(n);
+
+        vector<int> vec(n);
+
+        for (int i = 0; i < n; i++)
+        {
+            int num;
+            cin >> num;
+            vec[i] = num;
+        }
+
+        solve(vec, n);
     }
 
     return 0;
